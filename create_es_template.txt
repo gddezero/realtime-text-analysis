@@ -1,4 +1,4 @@
-curl -XPUT "https://.us-west-2.es.amazonaws.com/_template/movie-review" -H 'Content-Type: application/json' -d'
+curl -XPUT "https://<ES endpoint>/_template/movie-review" -H 'Content-Type: application/json' -d'
 {
   "index_patterns": [
     "movie-review*"
