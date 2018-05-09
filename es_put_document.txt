@@ -1,0 +1,47 @@
+curl -XPUT "https://<ES endpoint>/movie-review-2018-05-15/doc/1" -H 'Content-Type: application/json' -d'
+{
+    "@timestamp": "1525523999877",
+    "text": "test review",
+    "title": "test title",
+    "ip_addr": "1.1.1.1",
+    "doc_type": "doc",
+    "sentiment": "POSITIVE",
+
+    "entity": {
+      "text": [
+        "entity-1",
+        "entity-2"
+      ],
+      "type": [
+        "QUANTITY",
+        "LOCATION"
+      ]
+    },
+    "key_phrase": [
+      "phrase-1",
+      "phrase-2"
+    ],
+    "geoip": {
+      "continent_name": "North America",
+      "country_iso_code": "US",
+      "location": {
+        "lat": 37.751,
+        "lon": -97.822
+      }
+    }
+}
+'
+
+curl -XPUT " https://<ES endpoint>/movie-review-2018-05-15/doc/2" -H 'Content-Type: application/json' -d'
+{
+    "@timestamp": "1525523999877",
+    "title": "test title",
+    "doc_type": "entity",
+    "sentiment": "POSITIVE",
+    "parent": "1",
+    "entity": {
+      "text": "entity-1",
+      "type": "QUANTITY"
+    }
+}
+'
