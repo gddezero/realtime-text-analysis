@@ -3,10 +3,11 @@ from __future__ import print_function
 import base64
 import json
 import boto3
+import time
 
 BATCH_SIZE = 25
 ENTITY_STREAM_NAME = 'entity-stream'
-REGION_NAME = 'us-east-1'
+REGION_NAME = 'us-west-2'
 
 print('Loading function')
 client_comprehend = boto3.client(service_name='comprehend', region_name=REGION_NAME)
@@ -47,6 +48,7 @@ def lambda_handler(event, context):
             # save text analysis result to payload
             j = 0
             for payload in payload_list:
+                payload['@timestamp'] = str(int(time.time() * 1000))
                 payload['key_phrase'] = key_phrase_list[j]
                 payload['sentiment'] = sentiment_list[j]
                 payload['entity'] = {
@@ -84,6 +86,7 @@ def send_entity(text_list, sentiment_list, recordId_list, title_list):
         entity_type = []
         for entity in result['Entities']:
             payload = {
+                '@timestamp': str(int(time.time() * 1000)),
                 'entity': {
                     'text': entity['Text'],
                     'type': entity['Type']
