@@ -7,11 +7,10 @@ import time
 
 BATCH_SIZE = 25
 ENTITY_STREAM_NAME = 'entity-stream'
-REGION_NAME = 'us-west-2'
 
 print('Loading function')
-client_comprehend = boto3.client(service_name='comprehend', region_name=REGION_NAME)
-client_firehose = boto3.client(service_name='firehose', region_name=REGION_NAME)
+client_comprehend = boto3.client(service_name='comprehend')
+client_firehose = boto3.client(service_name='firehose')
 
 def lambda_handler(event, context):
     output = []
